@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monopoly Property Cards</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('monopoly.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
+  .property-card {
+    display: none;
+    transition: all 0.3s ease;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.737);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .card:hover {
+    background-color: rgba(50, 50, 50, 0.85);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Color backgrounds */
+  .bg-brown { background-color: #7b4f22 !important; color: white !important; }
+  .bg-light-blue { background-color: #5dade2 !important; color: white !important; }
+  .bg-pink { background-color: #e52ca7 !important; color: white !important; }
+  .bg-orange { background-color: #eb9108 !important; color: white !important; }
+  .bg-red { background-color: #d02512 !important; color: white !important; }
+  .bg-yellow { background-color: #e0bc2c !important; color: black !important; }
+  .bg-green { background-color: #27ae60 !important; color: white !important; }
+  .bg-dark-blue { background-color: #2e86c1 !important; color: white !important; }
+
+  .rent-table {
+    font-size: 0.9rem;
+  }
+
+  .rent-table td {
+    padding: 2px 10px;
+  }
+
+  /* Conditional text color on hover */
+  .card:hover .bg-brown,
+  .card:hover .bg-light-blue,
+  .card:hover .bg-pink,
+  .card:hover .bg-orange,
+  .card:hover .bg-red,
+  .card:hover .bg-green,
+  .card:hover .bg-dark-blue,
+  .card:hover .bg-secondary {
+    color: white !important;
+  }
+
+  /* Yellow stays black on hover */
+  .card:hover .bg-yellow {
+    background-color: #f1c40f !important;
+    color: black !important;
+  }
+
+  /* Utility light stays readable */
+  .card:hover .bg-light {
+    color: black !important;
+  }
+</style>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('monopoly.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
+  .property-card {
+    display: none;
+    transition: all 0.3s ease;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.737);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.099);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .card:hover {
+    background-color: rgba(50, 50, 50, 0.85);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.095);
+  }
+
+  /* Color backgrounds */
+  .bg-brown { background-color: #7b4f22 !important; color: white !important; }
+  .bg-light-blue { background-color: hsl(210, 79%, 81%) !important; color: white !important; }
+  .bg-pink { background-color: #e52ca7 !important; color: white !important; }
+  .bg-orange { background-color: #f39c12 !important; color: white !important; }
+  .bg-red { background-color: #e74c3c !important; color: white !important; }
+  .bg-yellow { background-color: #f7dc6f !important; color: black !important; }
+  .bg-green { background-color: #0e7e3d !important; color: white !important; }
+  .bg-dark-blue { background-color: #21217c !important; color: white !important; }
+
+  .rent-table {
+    font-size: 0.9rem;
+  }
+
+  .rent-table td {
+    padding: 2px 6px;
+  }
+
+  /* Conditional text color on hover */
+  .card:hover .bg-brown,
+  .card:hover .bg-light-blue,
+  .card:hover .bg-pink,
+  .card:hover .bg-orange,
+  .card:hover .bg-red,
+  .card:hover .bg-green,
+  .card:hover .bg-dark-blue,
+  .card:hover .bg-secondary {
+    color: white !important;
+  }
+
+  /* Yellow stays black on hover */
+  .card:hover .bg-yellow {
+    background-color: #f1c40f !important;
+    color: black !important;
+  }
+
+  /* Utility light stays readable */
+  .card:hover .bg-light {
+    color: black !important;
+  }
+</style>
+
+</head>
+<body>
+  <!-- The rest of your HTML remains exactly the same -->
+  <div class="container py-5">
+    <h1 class="text-center mb-4 text-white bg-dark bg-opacity-75 p-3 rounded">Monopoly Property Cards</h1>
+
+    <!-- Color Filter -->
+    <div class="mb-4">
+      <label for="colorSelect" class="form-label text-white bg-dark bg-opacity-75 p-2 rounded">Select Color Group:</label>
+      <select class="form-select" id="colorSelect">
+        <option value="">All Properties</option>
+        <option value="brown">Brown</option>
+        <option value="light-blue">Light Blue</option>
+        <option value="pink">Pink</option>
+        <option value="orange">Orange</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="dark-blue">Dark Blue</option>
+        <option value="railroad">Railroad</option>
+        <option value="utility">Utility</option>
+      </select>
+    </div>
+
+    <!-- Properties List -->
+    <div class="row" id="propertyCards">
+      <!-- Brown Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="brown">
+        <div class="card">
+          <div class="card-header bg-brown">Mediterranean Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $60</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$2</td></tr>
+                <tr><td>With 1 House:</td><td>$10</td></tr>
+                <tr><td>With 2 Houses:</td><td>$30</td></tr>
+                <tr><td>With 3 Houses:</td><td>$90</td></tr>
+                <tr><td>With 4 Houses:</td><td>$160</td></tr>
+                <tr><td>With Hotel:</td><td>$250</td></tr>
+                <tr><td>Mortgage Value:</td><td>$30</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="brown">
+        <div class="card">
+          <div class="card-header bg-brown">Baltic Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $60</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$4</td></tr>
+                <tr><td>With 1 House:</td><td>$20</td></tr>
+                <tr><td>With 2 Houses:</td><td>$60</td></tr>
+                <tr><td>With 3 Houses:</td><td>$180</td></tr>
+                <tr><td>With 4 Houses:</td><td>$320</td></tr>
+                <tr><td>With Hotel:</td><td>$450</td></tr>
+                <tr><td>Mortgage Value:</td><td>$30</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Light Blue Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="light-blue">
+        <div class="card">
+          <div class="card-header bg-light-blue">Oriental Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $100</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$6</td></tr>
+                <tr><td>With 1 House:</td><td>$30</td></tr>
+                <tr><td>With 2 Houses:</td><td>$90</td></tr>
+                <tr><td>With 3 Houses:</td><td>$270</td></tr>
+                <tr><td>With 4 Houses:</td><td>$400</td></tr>
+                <tr><td>With Hotel:</td><td>$550</td></tr>
+                <tr><td>Mortgage Value:</td><td>$50</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="light-blue">
+        <div class="card">
+          <div class="card-header bg-light-blue">Vermont Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $100</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$6</td></tr>
+                <tr><td>With 1 House:</td><td>$30</td></tr>
+                <tr><td>With 2 Houses:</td><td>$90</td></tr>
+                <tr><td>With 3 Houses:</td><td>$270</td></tr>
+                <tr><td>With 4 Houses:</td><td>$400</td></tr>
+                <tr><td>With Hotel:</td><td>$550</td></tr>
+                <tr><td>Mortgage Value:</td><td>$50</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="light-blue">
+        <div class="card">
+          <div class="card-header bg-light-blue">Connecticut Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $120</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$8</td></tr>
+                <tr><td>With 1 House:</td><td>$40</td></tr>
+                <tr><td>With 2 Houses:</td><td>$100</td></tr>
+                <tr><td>With 3 Houses:</td><td>$300</td></tr>
+                <tr><td>With 4 Houses:</td><td>$450</td></tr>
+                <tr><td>With Hotel:</td><td>$600</td></tr>
+                <tr><td>Mortgage Value:</td><td>$60</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pink Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="pink">
+        <div class="card">
+          <div class="card-header bg-pink">St. Charles Place</div>
+          <div class="card-body">
+            <b><p>Price: $140</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$10</td></tr>
+                <tr><td>With 1 House:</td><td>$50</td></tr>
+                <tr><td>With 2 Houses:</td><td>$150</td></tr>
+                <tr><td>With 3 Houses:</td><td>$450</td></tr>
+                <tr><td>With 4 Houses:</td><td>$625</td></tr>
+                <tr><td>With Hotel:</td><td>$750</td></tr>
+                <tr><td>Mortgage Value:</td><td>$70</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="pink">
+        <div class="card">
+          <div class="card-header bg-pink">States Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $140</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$10</td></tr>
+                <tr><td>With 1 House:</td><td>$50</td></tr>
+                <tr><td>With 2 Houses:</td><td>$150</td></tr>
+                <tr><td>With 3 Houses:</td><td>$450</td></tr>
+                <tr><td>With 4 Houses:</td><td>$625</td></tr>
+                <tr><td>With Hotel:</td><td>$750</td></tr>
+                <tr><td>Mortgage Value:</td><td>$70</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="pink">
+        <div class="card">
+          <div class="card-header bg-pink">Virginia Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $160</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$12</td></tr>
+                <tr><td>With 1 House:</td><td>$60</td></tr>
+                <tr><td>With 2 Houses:</td><td>$180</td></tr>
+                <tr><td>With 3 Houses:</td><td>$500</td></tr>
+                <tr><td>With 4 Houses:</td><td>$700</td></tr>
+                <tr><td>With Hotel:</td><td>$900</td></tr>
+                <tr><td>Mortgage Value:</td><td>$80</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orange Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="orange">
+        <div class="card">
+          <div class="card-header bg-orange">St. James Place</div>
+          <div class="card-body">
+            <b><p>Price: $180</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$14</td></tr>
+                <tr><td>With 1 House:</td><td>$70</td></tr>
+                <tr><td>With 2 Houses:</td><td>$200</td></tr>
+                <tr><td>With 3 Houses:</td><td>$550</td></tr>
+                <tr><td>With 4 Houses:</td><td>$750</td></tr>
+                <tr><td>With Hotel:</td><td>$950</td></tr>
+                <tr><td>Mortgage Value:</td><td>$90</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="orange">
+        <div class="card">
+          <div class="card-header bg-orange">Tennessee Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $180</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$14</td></tr>
+                <tr><td>With 1 House:</td><td>$70</td></tr>
+                <tr><td>With 2 Houses:</td><td>$200</td></tr>
+                <tr><td>With 3 Houses:</td><td>$550</td></tr>
+                <tr><td>With 4 Houses:</td><td>$750</td></tr>
+                <tr><td>With Hotel:</td><td>$950</td></tr>
+                <tr><td>Mortgage Value:</td><td>$90</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="orange">
+        <div class="card">
+          <div class="card-header bg-orange">New York Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $200</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$16</td></tr>
+                <tr><td>With 1 House:</td><td>$80</td></tr>
+                <tr><td>With 2 Houses:</td><td>$220</td></tr>
+                <tr><td>With 3 Houses:</td><td>$600</td></tr>
+                <tr><td>With 4 Houses:</td><td>$800</td></tr>
+                <tr><td>With Hotel:</td><td>$1000</td></tr>
+                <tr><td>Mortgage Value:</td><td>$100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="red">
+        <div class="card">
+          <div class="card-header bg-red">Kentucky Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $220</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$18</td></tr>
+                <tr><td>With 1 House:</td><td>$90</td></tr>
+                <tr><td>With 2 Houses:</td><td>$250</td></tr>
+                <tr><td>With 3 Houses:</td><td>$700</td></tr>
+                <tr><td>With 4 Houses:</td><td>$875</td></tr>
+                <tr><td>With Hotel:</td><td>$1050</td></tr>
+                <tr><td>Mortgage Value:</td><td>$110</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="red">
+        <div class="card">
+          <div class="card-header bg-red">Indiana Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $220</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$18</td></tr>
+                <tr><td>With 1 House:</td><td>$90</td></tr>
+                <tr><td>With 2 Houses:</td><td>$250</td></tr>
+                <tr><td>With 3 Houses:</td><td>$700</td></tr>
+                <tr><td>With 4 Houses:</td><td>$875</td></tr>
+                <tr><td>With Hotel:</td><td>$1050</td></tr>
+                <tr><td>Mortgage Value:</td><td>$110</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="red">
+        <div class="card">
+          <div class="card-header bg-red">Illinois Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $240</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$20</td></tr>
+                <tr><td>With 1 House:</td><td>$100</td></tr>
+                <tr><td>With 2 Houses:</td><td>$300</td></tr>
+                <tr><td>With 3 Houses:</td><td>$750</td></tr>
+                <tr><td>With 4 Houses:</td><td>$925</td></tr>
+                <tr><td>With Hotel:</td><td>$1100</td></tr>
+                <tr><td>Mortgage Value:</td><td>$120</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yellow Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="yellow">
+        <div class="card">
+          <div class="card-header bg-yellow">Atlantic Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $260</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$22</td></tr>
+                <tr><td>With 1 House:</td><td>$110</td></tr>
+                <tr><td>With 2 Houses:</td><td>$330</td></tr>
+                <tr><td>With 3 Houses:</td><td>$800</td></tr>
+                <tr><td>With 4 Houses:</td><td>$975</td></tr>
+                <tr><td>With Hotel:</td><td>$1150</td></tr>
+                <tr><td>Mortgage Value:</td><td>$130</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="yellow">
+        <div class="card">
+          <div class="card-header bg-yellow">Ventnor Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $260</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$22</td></tr>
+                <tr><td>With 1 House:</td><td>$110</td></tr>
+                <tr><td>With 2 Houses:</td><td>$330</td></tr>
+                <tr><td>With 3 Houses:</td><td>$800</td></tr>
+                <tr><td>With 4 Houses:</td><td>$975</td></tr>
+                <tr><td>With Hotel:</td><td>$1150</td></tr>
+                <tr><td>Mortgage Value:</td><td>$130</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="yellow">
+        <div class="card">
+          <div class="card-header bg-yellow">Marvin Gardens</div>
+          <div class="card-body">
+            <b><p>Price: $280</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$24</td></tr>
+                <tr><td>With 1 House:</td><td>$120</td></tr>
+                <tr><td>With 2 Houses:</td><td>$360</td></tr>
+                <tr><td>With 3 Houses:</td><td>$850</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1025</td></tr>
+                <tr><td>With Hotel:</td><td>$1200</td></tr>
+                <tr><td>Mortgage Value:</td><td>$140</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Green Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="green">
+        <div class="card">
+          <div class="card-header bg-green">Pacific Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $300</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$26</td></tr>
+                <tr><td>With 1 House:</td><td>$130</td></tr>
+                <tr><td>With 2 Houses:</td><td>$390</td></tr>
+                <tr><td>With 3 Houses:</td><td>$900</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1100</td></tr>
+                <tr><td>With Hotel:</td><td>$1275</td></tr>
+                <tr><td>Mortgage Value:</td><td>$150</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="green">
+        <div class="card">
+          <div class="card-header bg-green">North Carolina Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $300</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$26</td></tr>
+                <tr><td>With 1 House:</td><td>$130</td></tr>
+                <tr><td>With 2 Houses:</td><td>$390</td></tr>
+                <tr><td>With 3 Houses:</td><td>$900</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1100</td></tr>
+                <tr><td>With Hotel:</td><td>$1275</td></tr>
+                <tr><td>Mortgage Value:</td><td>$150</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="green">
+        <div class="card">
+          <div class="card-header bg-green">Pennsylvania Avenue</div>
+          <div class="card-body">
+            <b><p>Price: $320</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$28</td></tr>
+                <tr><td>With 1 House:</td><td>$150</td></tr>
+                <tr><td>With 2 Houses:</td><td>$450</td></tr>
+                <tr><td>With 3 Houses:</td><td>$1000</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1200</td></tr>
+                <tr><td>With Hotel:</td><td>$1400</td></tr>
+                <tr><td>Mortgage Value:</td><td>$160</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Blue Properties -->
+      <div class="col-md-4 mb-3 property-card" data-color="dark-blue">
+        <div class="card">
+          <div class="card-header bg-dark-blue">Park Place</div>
+          <div class="card-body">
+            <b><p>Price: $350</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$35</td></tr>
+                <tr><td>With 1 House:</td><td>$175</td></tr>
+                <tr><td>With 2 Houses:</td><td>$500</td></tr>
+                <tr><td>With 3 Houses:</td><td>$1100</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1300</td></tr>
+                <tr><td>With Hotel:</td><td>$1500</td></tr>
+                <tr><td>Mortgage Value:</td><td>$175</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="dark-blue">
+        <div class="card">
+          <div class="card-header bg-dark-blue">Boardwalk</div>
+          <div class="card-body">
+            <b><p>Price: $400</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$50</td></tr>
+                <tr><td>With 1 House:</td><td>$200</td></tr>
+                <tr><td>With 2 Houses:</td><td>$600</td></tr>
+                <tr><td>With 3 Houses:</td><td>$1400</td></tr>
+                <tr><td>With 4 Houses:</td><td>$1700</td></tr>
+                <tr><td>With Hotel:</td><td>$2000</td></tr>
+                <tr><td>Mortgage Value:</td><td>$200</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Railroads -->
+      <div class="col-md-4 mb-3 property-card" data-color="railroad">
+        <div class="card">
+          <div class="card-header bg-secondary">Reading Railroad</div>
+          <div class="card-body">
+            <p>Price: $200</p>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$25</td></tr>
+                <tr><td>If 2 RR's are owned:</td><td>$50</td></tr>
+                <tr><td>If 3 RR's are owned:</td><td>$100</td></tr>
+                <tr><td>If 4 RR's are owned:</td><td>$200</td></tr>
+                <tr><td>Mortgage Value:</td><td>$100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="railroad">
+        <div class="card">
+          <div class="card-header bg-secondary">Pennsylvania Railroad</div>
+          <div class="card-body">
+            <p>Price: $200</p>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$25</td></tr>
+                <tr><td>If 2 RR's are owned:</td><td>$50</td></tr>
+                <tr><td>If 3 RR's are owned:</td><td>$100</td></tr>
+                <tr><td>If 4 RR's are owned:</td><td>$200</td></tr>
+                <tr><td>Mortgage Value:</td><td>$100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="railroad">
+        <div class="card">
+          <div class="card-header bg-secondary">B. & O. Railroad</div>
+          <div class="card-body">
+            <p>Price: $200</p>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$25</td></tr>
+                <tr><td>If 2 RR's are owned:</td><td>$50</td></tr>
+                <tr><td>If 3 RR's are owned:</td><td>$100</td></tr>
+                <tr><td>If 4 RR's are owned:</td><td>$200</td></tr>
+                <tr><td>Mortgage Value:</td><td>$100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="railroad">
+        <div class="card">
+          <div class="card-header bg-secondary">Short Line</div>
+          <div class="card-body">
+            <p>Price: $200</p>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>Rent:</td><td>$25</td></tr>
+                <tr><td>If 2 RR's are owned:</td><td>$50</td></tr>
+                <tr><td>If 3 RR's are owned:</td><td>$100</td></tr>
+                <tr><td>If 4 RR's are owned:</td><td>$200</td></tr>
+                <tr><td>Mortgage Value:</td><td>$100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Utilities -->
+      <div class="col-md-4 mb-3 property-card" data-color="utility">
+        <div class="card">
+          <div class="card-header bg-light">Electric Company</div>
+          <div class="card-body">
+            <b><p>Price: $150</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>If one Utility is owned:</td><td>4 times dice roll</td></tr>
+                <tr><td>If both Utilities are owned:</td><td>10 times dice roll</td></tr>
+                <tr><td>Mortgage Value:</td><td>$75</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3 property-card" data-color="utility">
+        <div class="card">
+          <div class="card-header bg-light">Water Works</div>
+          <div class="card-body">
+            <b><p>Price: $150</p></b>
+            <table class="table table-bordered rent-table">
+              <tbody>
+                <tr><td>If one Utility is owned:</td><td>4 times dice roll</td></tr>
+                <tr><td>If both Utilities are owned:</td><td>10 times dice roll</td></tr>
+                <tr><td>Mortgage Value:</td><td>$75</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const colorSelect = document.getElementById('colorSelect');
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    // Show all cards by default
+    propertyCards.forEach(card => {
+      card.style.display = 'block';
+    });
+
+    colorSelect.addEventListener('change', function () {
+      const selectedColor = this.value;
+      propertyCards.forEach(card => {
+        if (selectedColor === "") {
+          card.style.display = 'block';
+        } else {
+          card.style.display = (card.dataset.color === selectedColor) ? 'block' : 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
