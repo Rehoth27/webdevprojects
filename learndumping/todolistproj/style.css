@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  margin: 0;
+  padding: 20px;
+  color: #FFFFFF;
+}
+
+.container {
+  max-width: 500px;
+  background: #343333;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background: #6711d0;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  color:#FFFFFF
+}
+button:hover {
+  background: #5a0bb0;
+}
+ol {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.task-text.completed {
+  color: rgb(76, 245, 76);
+  text-decoration: line-through;
+}
+
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+li span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+li span button {
+  all: unset; /* resets weird inherited styles */
+  background: #6711d0;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li span button:hover {
+  background: #5a0bb0;
+}
+
+li span button:focus {
+  outline: none;
+}
